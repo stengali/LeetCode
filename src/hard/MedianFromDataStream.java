@@ -1,5 +1,6 @@
 package hard;
 
+import java.util.Collections;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
@@ -8,20 +9,23 @@ import java.util.Queue;
  */
 public class MedianFromDataStream {
 
-    private Queue<Long> small = new PriorityQueue(),
-            large = new PriorityQueue();
 
+
+    PriorityQueue<Integer> min = new PriorityQueue();
+    PriorityQueue<Integer> max = new PriorityQueue(1000, Collections.reverseOrder());
+    // Adds a number into the data structure.
     public void addNum(int num) {
-        large.add((long) num);
-        small.add(-large.poll());
-        if (large.size() < small.size())
-            large.add(-small.poll());
+        max.offer(num);
+        min.offer(max.poll());
+        if (max.size() < min.size()){
+            max.offer(min.poll());
+        }
     }
 
+    // Returns the median of current data stream
     public double findMedian() {
-        return large.size() > small.size()
-                ? large.peek()
-                : (large.peek() - small.peek()) / 2.0;
+        if (max.size() == min.size()) return (max.peek() + min.peek()) /  2.0;
+        else return max.peek();
     }
 
     public static void main(String[] args) {
