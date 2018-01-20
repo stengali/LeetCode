@@ -99,7 +99,7 @@ class Pair implements Comparable<Pair> {
         this.times = times;
         this.stamp = stamp;
     }
-    /* this compareto will make LFU to work as LRU by comparing the timestamp.
+    /* this compareTo method will make LFU to work as LRU by comparing the timestamp.
     public int compareTo(Pair that) {
         return (int) (this.stamp - that.stamp);
     }
