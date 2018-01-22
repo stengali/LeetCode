@@ -22,7 +22,7 @@ public class CopyRandomListNode {
         RandomListNode node = head;
         Map<RandomListNode, RandomListNode> map = new HashMap<>();
 
-        for (node != null) {
+        while (node != null) {
             map.put(node, new RandomListNode(node.label));
             node = node.next;
         }
